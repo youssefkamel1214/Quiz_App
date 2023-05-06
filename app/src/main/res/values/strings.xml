@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Quiz App</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="nameerror">"this field can not be empty "</string>
+    <string name="log_in">Sign In</string>
+    <string name="sign_up">Sign up</string>
+    <string name="change_to_sign_up">Sign Up</string>
+    <string name="change_to_log_in">Sign In</string>
+    <string name="email_wrong_format">invalid email address</string>
+    <string name="firebase_no_email">there are no email registerd like that</string>
+    <string name="firebase_email_exists">this email already exists</string>
+    <string name="firebase_wrong_password">wrong password</string>
+    <string name="passwordwrongfromat">password should contain Upper case charter and digit</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="quiz_name">enter Quiz Name</string>
+</resources>

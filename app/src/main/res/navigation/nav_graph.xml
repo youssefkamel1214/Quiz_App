@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loginFragment">
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.quizapp.authnitication.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_teacherFragment"
+            app:destination="@id/teacherFragment"
+            app:popUpTo="@id/nav_graph" />
+    </fragment>
+    <fragment
+        android:id="@+id/teacherFragment"
+        android:name="com.example.quizapp.teacher.TeacherFragment"
+        android:label="TeacherFragment" >
+        <action
+            android:id="@+id/action_teacherFragment_to_makeQuizFragment"
+            app:destination="@id/makeQuizFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/makeQuizFragment"
+        android:name="com.example.quizapp.MakeQuizFragment"
+        android:label="MakeQuizFragment" />
+</navigation>
