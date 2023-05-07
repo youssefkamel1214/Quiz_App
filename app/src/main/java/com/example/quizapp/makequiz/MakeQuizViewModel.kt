@@ -1,7 +1,8 @@
-package com.example.quizapp
+package com.example.quizapp.makequiz
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.quizapp.models.Question
@@ -28,27 +29,41 @@ class MakeQuizViewModel : ViewModel() {
     val option4=MutableLiveData("")
     val answer=MutableLiveData("")
     val index=MutableLiveData(-1)
+    val questiontitlename=Transformations.map(index){
+        if(it==-1)
+            return@map "quiz Name"
+        else
+            return@map "Question"
+    }
     private val _navigateToTeacherFragment=MutableLiveData(false)
     val navigateToTeacherFragment: LiveData<Boolean>
         get() = _navigateToTeacherFragment
     private fun validate(): Boolean {
-        var hasError=false
+        var hasError=true
         if(questionName.value.isNullOrEmpty()||option1.value.isNullOrEmpty()||
             option2.value.isNullOrEmpty()||option3.value.isNullOrEmpty()||option4.value.isNullOrEmpty()||answer.value.isNullOrEmpty())
-            hasError=true
+            hasError=false
         return hasError
     }
 
     fun nextButton(){
-        if(index.value==-1){
+        if(index.value==-1&&!questionName.value.isNullOrEmpty()){
             quizname=questionName.value!!
+            index.postValue(index.value!!+1)
+            clearEveryThing()
         }
         if(index.value!!>=0&&validate()){
-            val q=Question(questionName.value,answer.value, listOf(option1.value!!,option2.value!!,option3.value!!,option4.value!!))
+            val answerString=when(answer.value!!.toInt()-1){
+                0->option1.value
+                1->option2.value
+                2->option3.value
+                else->option4.value
+            }
+            val q=Question(questionName.value,answerString, listOf(option1.value!!,option2.value!!,option3.value!!,option4.value!!))
             questions.add(q)
+            index.postValue(index.value!!+1)
+            clearEveryThing()
         }
-        index.postValue(index.value!!+1)
-        clearEveryThing()
     }
 
     private fun clearEveryThing() {
@@ -65,7 +80,13 @@ class MakeQuizViewModel : ViewModel() {
         if(!validate()){
            return
         }
-        val q=Question(questionName.value,answer.value, listOf(option1.value!!,option2.value!!,option3.value!!,option4.value!!))
+        val answerString=when(answer.value!!.toInt()-1){
+            0->option1.value
+            1->option2.value
+            2->option3.value
+            else->option4.value
+        }
+        val q=Question(questionName.value,answerString, listOf(option1.value!!,option2.value!!,option3.value!!,option4.value!!))
         questions.add(q)
         viewModelScope.launch {
             val docRef = db.collection("quizzes").document()

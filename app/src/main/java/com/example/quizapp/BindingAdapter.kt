@@ -1,6 +1,7 @@
 package com.example.quizapp
 
 import android.graphics.Bitmap
+import android.graphics.Color
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
@@ -82,4 +83,5 @@ fun set_visibility_using_state(view: View,state:Int){
     else
         view.visibility=View.GONE
 }
+
 

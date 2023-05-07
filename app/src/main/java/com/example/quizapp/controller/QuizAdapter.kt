@@ -30,7 +30,7 @@ class QuizAdapter(val list: List<Quiz>,val clickListener:ClickListener):Recycler
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val quiz=list[position]
         holder.binding.title.text=quiz.name
-        holder.binding.questions.text= quiz.questions!!.size.toString()+"questions"
+        holder.binding.questions.text= quiz.questions!!.size.toString()+" questions"
         holder.binding.teacher.text="Teacher : "+quiz.teacher
         holder.binding.constraint.setOnClickListener { clickListener.onClick(quiz) }
     }

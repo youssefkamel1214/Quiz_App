@@ -35,7 +35,7 @@ class LoginFragment : Fragment() {
                 if (viewModel.user!!.type == "teacher")
                     findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToTeacherFragment())
                 else {
-
+                     findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToStudentFragment())
                 }
             }
         }

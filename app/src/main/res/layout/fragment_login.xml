@@ -14,32 +14,44 @@
         android:layout_height="match_parent"
         tools:context=".authnitication.LoginFragment">
 
+        <ProgressBar
+            android:id="@+id/progressBar3"
+            style="?android:attr/progressBarStyle"
+            setvisibility="@{viewmodel.loadingState}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
         <EditText
             android:id="@+id/name"
+            Name_error="@{viewmodel.nameError}"
+            setvisibility="@{!viewmodel.modeSignIn}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:hint="name"
             android:inputType="textEmailAddress"
-            android:textSize="20sp"
-            setvisibility="@{!viewmodel.modeSignIn}"
-            Name_error="@{viewmodel.nameError}"
-            android:text="@={viewmodel.name}"
             android:onTextChanged="@{()->viewmodel.clearNameError()}"
+            android:text="@={viewmodel.name}"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/email"
+            email_error="@{viewmodel.emailError}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:hint="email"
-            email_error="@{viewmodel.emailError}"
-            android:text="@={viewmodel.email}"
-            android:onTextChanged="@{()->viewmodel.clearEmailError()}"
             android:inputType="textEmailAddress"
+            android:onTextChanged="@{()->viewmodel.clearEmailError()}"
+            android:text="@={viewmodel.email}"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -47,13 +59,14 @@
 
         <EditText
             android:id="@+id/password"
+            password_error="@{viewmodel.passwordError}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            password_error="@{viewmodel.passwordError}"
-            android:text="@={viewmodel.password}"
-            android:onTextChanged="@{()->viewmodel.clearPasswordError()}"
             android:hint="password"
+            android:inputType="textPassword"
+            android:onTextChanged="@{()->viewmodel.clearPasswordError()}"
+            android:text="@={viewmodel.password}"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -61,13 +74,14 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/appCompatButton"
+            setvisibility="@{!viewmodel.loadingState}"
             set_form_authentication_button_text="@{viewmodel.modeSignIn}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/buttonbackground"
-            android:padding="8dp"
             android:backgroundTint="@color/pink"
             android:onClick="@{()->viewmodel.validateAndSumbit()}"
+            android:padding="8dp"
             android:textColor="?attr/colorOnPrimary"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -75,6 +89,7 @@
             app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
         <TextView
+            setvisibility="@{!viewmodel.loadingState}"
             android:id="@+id/textView"
             set_form_authentication_state_changer="@{viewmodel.modeSignIn}"
             android:layout_width="wrap_content"
@@ -90,11 +105,11 @@
 
         <RadioGroup
             android:id="@+id/radioGroup"
+            setvisibility="@{!viewmodel.modeSignIn}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:orientation="horizontal"
-            setvisibility="@{!viewmodel.modeSignIn}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/password">
@@ -104,20 +119,20 @@
                 android:id="@+id/teacher"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:layout_weight="1"
                 android:layout_marginHorizontal="@dimen/_20sdp"
-                android:text="Teacher" />
+                android:layout_weight="1"
+                android:text="Teacher"
+                android:textSize="20sp" />
 
             <RadioButton
                 android:id="@+id/Student"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_20sdp"
-                android:textSize="20sp"
                 android:layout_gravity="end"
+                android:layout_marginHorizontal="@dimen/_20sdp"
                 android:layout_weight="1"
-                android:text="Student" />
+                android:text="Student"
+                android:textSize="20sp" />
         </RadioGroup>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

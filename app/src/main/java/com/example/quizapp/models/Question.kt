@@ -1,3 +1,9 @@
 package com.example.quizapp.models
 
-data class Question(val question:String?=null,val Answer:String?=null,val options:List<String>?=null)
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
+
+data class Question(val question:String?=null,val answer:String?=null,val options:List<String>?=null):
+    Parcelable

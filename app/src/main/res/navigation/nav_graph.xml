@@ -13,6 +13,10 @@
             android:id="@+id/action_loginFragment_to_teacherFragment"
             app:destination="@id/teacherFragment"
             app:popUpTo="@id/nav_graph" />
+        <action
+            android:id="@+id/action_loginFragment_to_studentFragment"
+            app:destination="@id/studentFragment"
+            app:popUpTo="@id/nav_graph" />
     </fragment>
     <fragment
         android:id="@+id/teacherFragment"
@@ -24,6 +28,23 @@
     </fragment>
     <fragment
         android:id="@+id/makeQuizFragment"
-        android:name="com.example.quizapp.MakeQuizFragment"
+        android:name="com.example.quizapp.makequiz.MakeQuizFragment"
         android:label="MakeQuizFragment" />
+    <fragment
+        android:id="@+id/studentFragment"
+        android:name="com.example.quizapp.student.StudentFragment"
+        android:label="StudentFragment" >
+
+
+    </fragment>
+    <fragment
+        android:id="@+id/resultFragment"
+        android:name="com.example.quizapp.result.ResultFragment"
+        android:label="ResultFragment" />
+    <fragment
+        android:id="@+id/quizFragment"
+        android:name="com.example.quizapp.quiz.QuizFragment"
+        android:label="QuizFragment" >
+
+    </fragment>
 </navigation>

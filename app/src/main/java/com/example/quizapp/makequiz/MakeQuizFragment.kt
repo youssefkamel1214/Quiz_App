@@ -1,4 +1,4 @@
-package com.example.quizapp
+package com.example.quizapp.makequiz
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -27,6 +27,12 @@ class MakeQuizFragment : Fragment() {
         viewModel.navigateToTeacherFragment.observe(viewLifecycleOwner){
             if(it)
                 findNavController().popBackStack()
+        }
+
+        viewModel.index.observe(viewLifecycleOwner){
+            if(it>-1)
+                binding.Title.text="Question${it+1}"
+
         }
         return binding.root
     }

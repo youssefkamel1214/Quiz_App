@@ -6,13 +6,13 @@
     <data>
 <variable
     name="viewModel"
-    type="com.example.quizapp.MakeQuizViewModel" />
+    type="com.example.quizapp.makequiz.MakeQuizViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MakeQuizFragment">
+        tools:context=".makequiz.MakeQuizFragment">
 
 
         <TextView
@@ -34,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="name"
+            android:hint="@{viewModel.questiontitlename}"
             android:text="@={viewModel.questionName}"
             android:inputType="textPersonName"
             android:textSize="20sp"
@@ -130,25 +130,9 @@
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toTopOf="@+id/finish"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/answer">
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/previos"
-                android:layout_width="@dimen/_140sdp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/buttonbackground"
-                android:backgroundTint="@color/pink"
-                android:padding="16dp"
-                android:text="Previous"
-                set_visibility_using_state="@{viewModel.index}"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/next"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/next"
@@ -158,11 +142,12 @@
                 android:backgroundTint="@color/pink"
                 android:padding="16dp"
                 android:text="Add question"
+                android:onClick="@{()->viewModel.nextButton()}"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/previos"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -172,6 +157,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/buttonbackground"
             android:backgroundTint="@color/pink"
+            android:onClick="@{()->viewModel.submit()}"
             android:padding="16dp"
             android:text="Finish"
             android:textSize="18sp"

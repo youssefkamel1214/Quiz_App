@@ -1,4 +1,7 @@
 package com.example.quizapp.models
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
-data class User(val email:String?=null,val type:String?=null,val name:String?=null)
+@Parcelize
+data class User(val email:String?=null,val type:String?=null,val name:String?=null):Parcelable

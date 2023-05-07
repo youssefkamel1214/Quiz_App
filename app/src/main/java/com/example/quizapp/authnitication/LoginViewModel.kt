@@ -37,6 +37,8 @@ class LoginViewModel : ViewModel() {
     private val _navigateToHomeFragment=MutableLiveData(false)
     val navigateToHomeFragment:LiveData<Boolean>
         get() = _navigateToHomeFragment
+    private val _loadingState=MutableLiveData(false)
+    val loadingState:LiveData<Boolean>get() = _loadingState
     var user:User?=null
     fun clearPasswordError(){
         passwordError.value=0
@@ -76,9 +78,11 @@ class LoginViewModel : ViewModel() {
     private fun signIn() {
         viewModelScope.launch {
             try {
+                _loadingState.postValue(true)
                 val res=auth.signInWithEmailAndPassword(email.value!!,password.value!!).await()
                 val docref=db.collection("users").document(res.user!!.uid).get().await()
                 user= docref.toObject<User>()
+
                 _navigateToHomeFragment.postValue(true)
 
             }catch (e:Exception){
@@ -91,6 +95,8 @@ class LoginViewModel : ViewModel() {
                     }
                     Log.e(tag,e.message.toString())
                 }
+            }finally {
+                _loadingState.postValue(false)
             }
         }
     }
@@ -98,6 +104,7 @@ class LoginViewModel : ViewModel() {
     private fun signup() {
         viewModelScope.launch {
             try {
+
                 val res =
                     auth.createUserWithEmailAndPassword(email.value!!, password.value!!).await()
             user = when(selectedItem){
@@ -120,6 +127,8 @@ class LoginViewModel : ViewModel() {
                     }
                     Log.e(tag, e.message.toString())
                 }
+            }finally {
+                _loadingState.postValue(false)
             }
         }
     }
@@ -170,8 +179,13 @@ class LoginViewModel : ViewModel() {
         }
         return !haserror
     }
-    init {
-        if(auth.currentUser!=null)
-            _navigateToHomeFragment.postValue(true)
-    }
+//    init {
+//        if(auth.currentUser!=null) {
+//            viewModelScope.launch {
+//                val docref=db.collection("users").document(auth.currentUser!!.uid).get().await()
+//                user= docref.toObject<User>()
+//                 _navigateToHomeFragment.postValue(true)
+//            }
+//        }
+//    }
 }
